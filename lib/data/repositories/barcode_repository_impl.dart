@@ -33,4 +33,16 @@ class BarcodeRepositoryImpl implements BarcodeRepositoryInterface {
         .toList();
     return barcodeList;
   }
+
+  @override
+  Future<List<BarcodeModel>> generateNewBarcodes() async {
+    final List<Map<String, dynamic>> data =
+        await gateway.fetchBarcodesFromApi();
+    return data
+        .map((Map<String, dynamic> json) => BarcodeModel(
+              code: json['code'].toString(),
+              description: json['description'].toString(),
+            ))
+        .toList();
+  }
 }

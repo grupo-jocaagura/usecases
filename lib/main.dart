@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'data/gateways/barcode_gateway_impl.dart';
 import 'data/repositories/barcode_repository_impl.dart';
+import 'domain/gateways/barcode_gateway_random_impl.dart';
+import 'domain/usecases/generate_new_barcodes_usecase.dart';
 import 'domain/usecases/get_barcodes_usecase.dart';
 import 'ui/pages/barcode_labels_page.dart';
 import 'ui/providers/barcode_state_manager.dart';
@@ -13,6 +15,11 @@ void main() {
       viewModel: BarcodeViewModel(
         getBarcodesUseCase: GetBarcodesUsecase(
           BarcodeRepositoryImpl(gateway: BarcodeGatewayImpl()),
+        ),
+        generateNewBarcodesUsecase: GenerateNewBarcodesUsecase(
+          BarcodeRepositoryImpl(
+            gateway: BarcodeGatewayRandomImpl(),
+          ),
         ),
       ),
       child: const MyApp(),

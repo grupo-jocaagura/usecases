@@ -14,11 +14,12 @@ class AddBarcodeButton extends StatelessWidget {
     return ListenableBuilder(
       listenable: viewModel,
       builder: (BuildContext context, Widget? child) {
-        debugPrint('🐱‍👤 Redibujando la pantalla ${viewModel.isLoading}');
+        debugPrint('🐱‍👤 Redibujando el botón ${viewModel.activateButton}');
         return FloatingActionButton(
-          onPressed: viewModel.isLoading ? null : viewModel.fetchBarcodes,
+          onPressed:
+              viewModel.activateButton ? null : viewModel.fetchNewBarcodes,
           tooltip: 'Generar código aleatorio',
-          child: viewModel.isLoading
+          child: viewModel.activateButton
               ? const CircularProgressIndicator(color: Colors.white)
               : const Icon(Icons.add),
         );
