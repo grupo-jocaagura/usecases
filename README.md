@@ -1,16 +1,67 @@
-# usecases
+# UseCases Demo
+    ![Coverage](https://img.shields.io/badge/coverage-99%25-brightgreen)
+    ![Coverage](https://img.shields.io/badge/Author-@albertjjimenezp-brightgreen)
+    -------------------------------![Author](https://avatars.githubusercontent.com/u/35118534?s=200&u=80708c1558e4e482d52d31490959442f618a2d62&v=4)----------🐱‍👤
 
-Presentacion de usecases.
+    ## 📌 Descripción
+    Este proyecto es una prueba de concepto (**POC**) para demostrar la implementación de **UseCases** en Flutter siguiendo una arquitectura modular.
 
-## Getting Started
+    ## 📂 Estructura del Proyecto
+    ```
+    lib
+    ├── data
+    │   ├── gateways
+    │   │   ├── barcode_gateway_impl.dart
+    │   ├── repositories
+    │   │   ├── barcode_repository_impl.dart
+    │
+    ├── domain
+    │   ├── entities
+    │   │   ├── gateway.dart
+    │   │   ├── model.dart
+    │   │   ├── repository.dart
+    │   │   ├── state_manager.dart
+    │   │   ├── usecase.dart
+    │   │   ├── viewmodel.dart
+    │   ├── usecases
+    │   │   ├── get_barcodes_usecase.dart
+    │
+    ├── viewmodels
+    │   ├── barcode_viewmodel.dart
+    │
+    ├── ui
+    │   ├── pages
+    │   ├── providers
+    │   ├── widgets
+    │
+    ├── main.dart
+    ```
 
-This project is a starting point for a Flutter application.
+    ## 🚀 Cómo Ejecutar
+    ```sh
+    flutter run
+    ```
 
-A few resources to get you started if this is your first Flutter project:
+    ## 📖 Uso de Clases Principales
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+    ### 📌 `GetBarcodesUsecase`
+    ```dart
+    final usecase = GetBarcodesUsecase(repository);
+    final barcodes = await usecase.execute();
+    ```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    ### 📌 `BarcodeViewModel`
+    ```dart
+    final viewModel = BarcodeViewModel(getBarcodesUseCase: usecase);
+    await viewModel.fetchBarcodes();
+    ```
+
+    ### 📌 `BarcodeRepositoryImpl`
+    ```dart
+    final repository = BarcodeRepositoryImpl(gateway: BarcodeGatewayImpl());
+    final barcodes = await repository.getBarcodes();
+    ```
+
+    ## 📄 Licencia
+    Este proyecto se encuentra bajo la licencia **MIT**.
+ 
