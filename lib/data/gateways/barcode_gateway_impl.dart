@@ -4,6 +4,15 @@ import 'package:flutter/material.dart';
 
 import '../../domain/gateways/barcode_gateway.dart';
 
+/// Implementación del Gateway para la comunicación con fuentes externas.
+///
+/// Este Gateway simula una API y retorna una lista de códigos de barras.
+///
+/// Ejemplo de uso:
+/// ```dart
+/// final gateway = BarcodeGatewayImpl();
+/// final barcodes = await gateway.fetchBarcodesFromApi();
+/// ```
 class BarcodeGatewayImpl implements BarcodeGateway {
   /// Simula una API devolviendo una lista de códigos de barras.
   @override

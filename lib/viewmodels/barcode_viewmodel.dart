@@ -4,6 +4,15 @@ import '../domain/entities/viewmodel.dart';
 import '../domain/models/barcode_model.dart';
 import '../domain/usecases/get_barcodes_usecase.dart';
 
+/// ViewModel encargado de gestionar el estado de la lista de códigos de barras.
+///
+/// Se comunica con el caso de uso `GetBarcodesUsecase` para obtener los datos.
+///
+/// Ejemplo de uso:
+/// ```dart
+/// final viewModel = BarcodeViewModel(getBarcodesUseCase: usecase);
+/// await viewModel.fetchBarcodes();
+/// ```
 class BarcodeViewModel extends ViewModel {
   BarcodeViewModel({required this.getBarcodesUseCase});
   final GetBarcodesUsecase getBarcodesUseCase;
@@ -21,7 +30,6 @@ class BarcodeViewModel extends ViewModel {
     _barcodes = await getBarcodesUseCase.execute();
 
     _isLoading = false;
-    debugPrint('🐱‍👤 Notificando a los listeners');
     notifyListeners();
   }
 }

@@ -4,6 +4,15 @@ import '../../domain/gateways/barcode_gateway.dart';
 import '../../domain/models/barcode_model.dart';
 import '../../domain/repositories/barcode_repository_interface.dart';
 
+/// Implementación del repositorio que obtiene los códigos de barras del Gateway.
+///
+/// Este repositorio convierte los datos obtenidos del Gateway en modelos de dominio.
+///
+/// Ejemplo de uso:
+/// ```dart
+/// final repository = BarcodeRepositoryImpl(gateway: BarcodeGatewayImpl());
+/// final barcodes = await repository.getBarcodes();
+/// ```
 class BarcodeRepositoryImpl implements BarcodeRepositoryInterface {
   BarcodeRepositoryImpl({required this.gateway});
 
@@ -11,7 +20,7 @@ class BarcodeRepositoryImpl implements BarcodeRepositoryInterface {
 
   @override
   Future<List<BarcodeModel>> getBarcodes() async {
-    debugPrint('🐱‍👤 Ejecutando la implementacion del repositorio');
+    debugPrint('🐱‍👤 Ejecutando la implementación del repositorio');
     final List<Map<String, dynamic>> data =
         await gateway.fetchBarcodesFromApi();
     final List<BarcodeModel> barcodeList = data
@@ -22,8 +31,6 @@ class BarcodeRepositoryImpl implements BarcodeRepositoryInterface {
           ),
         )
         .toList();
-    debugPrint('🐱‍👤 $data ${data.runtimeType}');
-    debugPrint('🐱‍👤 $barcodeList ${barcodeList.runtimeType}');
     return barcodeList;
   }
 }
