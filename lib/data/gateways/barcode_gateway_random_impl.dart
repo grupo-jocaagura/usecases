@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'barcode_gateway.dart';
+import '../../domain/gateways/barcode_gateway.dart';
 
 /// Implementación de un Gateway que genera códigos de barras aleatorios dinámicos.
 class BarcodeGatewayRandomImpl implements BarcodeGateway {

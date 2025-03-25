@@ -39,10 +39,12 @@ class BarcodeRepositoryImpl implements BarcodeRepositoryInterface {
     final List<Map<String, dynamic>> data =
         await gateway.fetchBarcodesFromApi();
     return data
-        .map((Map<String, dynamic> json) => BarcodeModel(
-              code: json['code'].toString(),
-              description: json['description'].toString(),
-            ))
+        .map(
+          (Map<String, dynamic> json) => BarcodeModel(
+            code: json['code'].toString(),
+            description: json['description'].toString(),
+          ),
+        )
         .toList();
   }
 }
