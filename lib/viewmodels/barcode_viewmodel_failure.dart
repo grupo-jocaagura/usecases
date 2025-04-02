@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:jocaagura_domain/jocaagura_domain.dart';
 
 import '../domain/entities/viewmodel.dart';
@@ -12,7 +13,7 @@ class BarcodeViewModelFailure extends ViewModel {
 
   final BarcodeRepositoryFailure repository;
 
-  List<BarcodeModel> _barcodes = <BarcodeModel>[];
+  final List<BarcodeModel> _barcodes = <BarcodeModel>[];
   ErrorItem? _error;
   bool _isLoading = false;
 
@@ -30,11 +31,14 @@ class BarcodeViewModelFailure extends ViewModel {
 
     result.when(
       (ErrorItem err) {
+        debugPrint('🐱‍👤 - Error capturado $err');
         _error = err;
-        _barcodes = <BarcodeModel>[];
       },
       (List<BarcodeModel> data) {
-        _barcodes = data;
+        if (_barcodes.length > 5) {
+          clearBarcodes();
+        }
+        _barcodes.addAll(data);
       },
     );
 
@@ -44,7 +48,15 @@ class BarcodeViewModelFailure extends ViewModel {
 
   Future<void> generateManualBarcode() async {
     final List<BarcodeModel> newOnes = await repository.generateNewBarcodes();
+    if (_barcodes.length > 5) {
+      clearBarcodes();
+    }
     _barcodes.addAll(newOnes);
+    notifyListeners();
+  }
+
+  void clearBarcodes() {
+    _barcodes.clear();
     notifyListeners();
   }
 

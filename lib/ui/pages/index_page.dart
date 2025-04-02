@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../providers/barcode_state_manager.dart';
+import '../widgets/error_slider_widget.dart';
 import '../widgets/navigator_list_tile.dart';
 import 'barcode_labels_failure_page.dart';
 import 'barcode_labels_page.dart';
@@ -32,6 +33,7 @@ class IndexPage extends StatelessWidget {
             title: 'Demo ViewModel con manejo de errores',
             subTitle: 'Con Either<ErrorItem, R> y diferenciación visual',
           ),
+          const ErrorSliderWidget(),
         ],
       ),
     );

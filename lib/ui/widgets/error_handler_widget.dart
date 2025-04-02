@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:text_responsive/text_responsive.dart';
 
 import '../../domain/models/error_item.dart';
 import '../../viewmodels/barcode_viewmodel_failure.dart';
@@ -22,7 +21,7 @@ class ErrorHandlerWidget extends StatelessWidget {
         if (error.type == ErrorType.toast) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: InlineTextWidget(error.description),
+              content: Text(error.description),
               duration: const Duration(seconds: 3),
             ),
           );
@@ -31,19 +30,19 @@ class ErrorHandlerWidget extends StatelessWidget {
           showDialog(
             context: context,
             builder: (BuildContext ctx) => AlertDialog(
-              title: InlineTextWidget(error.title),
-              content: InlineTextWidget(error.description),
+              title: Text(error.title),
+              content: Text(error.description),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(ctx).pop();
                     viewModel.clearError();
                   },
-                  child: const InlineTextWidget('Aceptar'),
+                  child: const Text('Aceptar'),
                 ),
               ],
             ),
-          );
+          ).then((_) => viewModel.clearError());
         }
       }
     });
